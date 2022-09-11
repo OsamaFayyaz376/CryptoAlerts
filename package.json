@@ -1,9 +1,9 @@
 {
-  "name": "cryto-land",
+  "name": "crypto-land",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod && npm install -g http-server-spa",
+    "heroku-postbuild": "ng build production && npm install -g http-server-spa",
     "start": "http-server-spa dist/cryptoland index.html $PORT",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",

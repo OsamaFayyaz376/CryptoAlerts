@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/CrytoLand",
+            "outputPath": "dist/CryptoLand",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "CrytoLand:build:production"
+              "browserTarget": "CryptoLand:build:production"
             },
             "development": {
-              "browserTarget": "CrytoLand:build:development"
+              "browserTarget": "CryptoLand:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "CrytoLand:build"
+            "browserTarget": "CryptoLand:build"
           }
         },
         "test": {
@@ -102,5 +102,5 @@
       }
     }
   },
-  "defaultProject": "CrytoLand"
+  "defaultProject": "CryptoLand"
 }
