@@ -9,6 +9,8 @@ import {Coin} from "../../Models/Coin";
 export class DisplayPriceComponent implements OnInit {
   @Input() data: Coin[] = [];
   @Input() totalPriceInvested: number = 0;
+  @Input() totalValue: number = 0;
+  @Input() totalPNL: number = 0;
 
   constructor() {
   }

@@ -1,12 +1,2 @@
-<div>
-  <table>
-    <th>Symbol</th>
-    <th>Invested Value ($)</th>
-    <th>Current Value ($)</th>
-    <th>Profit / Loss ($)</th>
-    <th>Current Price ($)</th>
-    <th>Quantity</th>
-    <th>Total Price Invested</th>
-  </table>
-</div>
-<app-display-price [data]="coins" [totalPriceInvested]="totalPriceInvested"></app-display-price>
+<app-display-price [data]="coins" [totalPriceInvested]="totalPriceInvested"
+                   [totalValue]="totalValue" [totalPNL]="totalPNL"></app-display-price>

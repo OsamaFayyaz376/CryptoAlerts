@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   portfolio: Portfolio[] = [];
   prices: TickerPrice[] = [];
   totalPriceInvested: number = 0;
+  totalValue: number = 0;
+  totalPNL: number = 0;
 
   constructor(private http: HttpClient) { }
 
@@ -28,11 +30,11 @@ export class AppComponent implements OnInit {
         setInterval(() => {
           this.fetchTickerPrices().subscribe(
             (tickerPrices: TickerPrice[]) => {
-              console.log(tickerPrices);
               this.prices = tickerPrices.filter(tickerPrice => this.investedPrices.find(investedPrice => investedPrice.symbol + "USDT" === tickerPrice.symbol))
-              console.log(this.prices);
               this.mapCoin();
-              this.totalPriceInvested = this.calculateTotalInvestedPrice(this.coins);
+              this.totalPriceInvested = this.calculateTotalInvestedPrice(this.investedPrices);
+              this.totalValue = this.calculateTotalValue(this.coins);
+              this.totalPNL = this.calculateTotalPNL(this.coins);
             },
             (error: HttpErrorResponse) => {
               alert("Error in fetching portfolio")
@@ -85,12 +87,27 @@ export class AppComponent implements OnInit {
     onSuccess();
   }
 
-  private calculateTotalInvestedPrice(coins: Coin[]) {
-    return coins.reduce(function (accumulator, curValue) {
+  private calculateTotalInvestedPrice(investedPrices: InvestedPrice[]) {
+    return investedPrices.reduce(function (accumulator, curValue) {
       // @ts-ignore
       return accumulator + curValue.investedPrice;
     }, 0)
   }
+
+  private calculateTotalValue(coins: Coin[]) {
+    return coins.reduce(function (accumulator, curValue) {
+      // @ts-ignore
+      return accumulator + curValue.currentValue;
+    }, 0)
+  }
+
+  private calculateTotalPNL(coins: Coin[]) {
+    return coins.reduce(function (accumulator, curValue) {
+      // @ts-ignore
+      return accumulator + curValue.pnl;
+    }, 0)
+  }
+
 
   private mapCoin() {
     let coin: Coin;
@@ -103,7 +120,7 @@ export class AppComponent implements OnInit {
       coin.symbol = portfolio.asset;
       coin.currentPrice = this.prices.find(price => price.symbol === portfolio.asset + "USDT")?.price;
       coin.quantity = Number(portfolio.free) + Number(portfolio.locked);
-      coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice;
+      coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice ?? 0;
       coin.currentValue = Number(coin.currentPrice) * Number(coin.quantity);
       coin.pnl = Number(coin.currentValue) - Number(coin.investedPrice);
       this.coins.push(coin);

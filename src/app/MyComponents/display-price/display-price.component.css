@@ -1,11 +1,30 @@
-table, th , td  {
-  border: 1px solid grey;
-  border-collapse: collapse;
-  padding: 5px;
+.container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
-table tr:nth-child(odd) {
-  background-color: #f1f1f1;
+.totalinvested{
+  border: 2px solid black;
 }
-table tr:nth-child(even) {
-  background-color: #ffffff;
+
+.totalvalue{
+  border: 2px solid black;
 }
+
+.red{
+  background: #F8D7DA;
+}
+
+.green{
+  background: #D1E7DD;
+}
+
+.pnl{
+  border: 2px solid black;
+}
+
+h1, h2{
+  margin: 15px;
+}
+
