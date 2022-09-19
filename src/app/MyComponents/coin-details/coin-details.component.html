@@ -1,0 +1,35 @@
+<h1 class="big-heading"><span>{{coin.symbol}} DETAILS</span></h1>
+
+<div class="container">
+  <h1>Total Invested - {{investedPrice}}</h1>
+  <h1>Coin Quantity - {{coinQuantity}}</h1>
+  <h1>Current Worth - {{currentValue}}</h1>
+  <!--suppress ALL-->
+  <h1 [ngClass]="pnl < 0 ? 'red' : 'green'">PNL : {{pnl}}</h1>
+
+  <h1>Current Price - {{coin.currentPrice}}</h1>
+
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Ideal Price</mat-label>
+      <!--suppress ALL-->
+      <input matInput placeholder="Price" value={{idealPrice}} #txtVal (keyup)="keyup(txtVal.value)">
+    </mat-form-field>
+  </form>
+
+  <span class="span-heading">Coin Percentage       </span>
+  <mat-slider class="slider" (input)="onInputChange($event)"
+              thumbLabel
+              [displayWith]="formatLabel"
+              tickInterval="1000"
+              step="5000"
+              min="0"
+              max="100000"
+              value="100000"
+              aria-label="units"></mat-slider>
+
+  <div></div>
+
+  <button type="button" class="btn btn-primary btn-lg" (click)="onClick()">Close</button>
+</div>
+

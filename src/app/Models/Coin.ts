@@ -4,5 +4,5 @@ export class Coin {
   investedPrice!: number;
   currentValue!: number;
   pnl!: number;
-  quantity: number | undefined;
+  quantity!: number;
 }
