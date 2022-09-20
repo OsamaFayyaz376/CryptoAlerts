@@ -1,17 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
+
+html{
+  font-size: 62.5%;
+}
+
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-slider-thumb-label {
   transform: rotate(45deg) !important;
   border-radius: 50% 50% 0 !important;
+  background-color: black !important;
 }
 
 .mat-slider-thumb {
   transform: scale(0) !important;
+  background-color: black !important;
 }
 
 .mat-slider-thumb-label-text {
   opacity: 1 !important;
+}
+
+.mat-accent .mat-slider-track-fill {
+  background-color: black !important;
+}
+
+
+@media (max-width:500px) {
+  html {
+    font-size: 50%;
+  }
 }

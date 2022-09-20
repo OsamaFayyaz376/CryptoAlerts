@@ -37,7 +37,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   fetchCoin() {
     this.fetchPortfolio(() => {
       this.fetchInvestedPrices(() => {
-        this.currentSub = timer(650, 1500).subscribe(
+        this.currentSub = timer(1000, 1800).subscribe(
           () => {
             this.fetchTickerPrices().subscribe(
               (tickerPrices: TickerPrice[]) => {
@@ -126,12 +126,22 @@ export class MapCoinComponent implements OnInit, OnDestroy {
     this.portfolio.forEach(portfolio => {
       coin = new Coin();
       coin.symbol = portfolio.asset;
-      coin.currentPrice = this.prices.find(price => price.symbol === portfolio.asset + "USDT")?.price;
+      coin.currentPrice = this.prices.find(price => {
+        if (portfolio.asset != "USDT") {
+          return price.symbol === portfolio.asset + "USDT"
+        }
+        return price.symbol === "USDC" + portfolio.asset;
+      })?.price ?? 0;
+      if(!coin.currentPrice) {
+        coin.currentPrice = 0;
+      }
       coin.quantity = Number(portfolio.free) + Number(portfolio.locked);
       coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice ?? 0;
       coin.currentValue = Number(coin.currentPrice) * Number(coin.quantity);
       coin.pnl = Number(coin.currentValue) - Number(coin.investedPrice);
-      this.coins.push(coin);
+      if (coin.investedPrice) {
+        this.coins.push(coin);
+      }
     })
   }
 
