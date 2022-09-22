@@ -37,6 +37,11 @@ html {
   color: white;
 }
 
+.background {
+  background: #212529;
+  color: white;
+}
+
 .pnl{
   border: 2px solid black;
 }

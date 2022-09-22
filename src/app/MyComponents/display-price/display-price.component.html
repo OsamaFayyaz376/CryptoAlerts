@@ -32,19 +32,19 @@
 
 <div class="container" *ngIf="showTable">
 
-  <div class="totalinvested green">
+  <div class="totalinvested background">
     <h1>Value Invested</h1>
     <h2>{{totalPriceInvested.toFixed(2)}}</h2>
   </div>
 
   <!--suppress ALL-->
-  <div class="totalvalue" [ngClass]="totalValue < totalPriceInvested ? 'red' : 'green'">
+  <div class="totalvalue background">
     <h1>Value Remaining</h1>
     <h2>{{totalValue.toFixed(2)}}</h2>
   </div>
 
   <!--suppress ALL-->
-  <div class="pnl" [ngClass]="totalPNL < 0 ? 'red' : 'green'">
+  <div class="pnl background" >
     <h1 *ngIf="totalPNL < 0">Value Lost</h1>
     <h1 *ngIf="totalPNL > 0">Value Gained</h1>
     <h2>{{totalPNL.toFixed(2)}}</h2>
