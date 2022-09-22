@@ -25,14 +25,18 @@ h1 {
   cursor: pointer;
 }
 
+.cross:hover {
+  background: red;
+}
+
 .big-heading {
-  color: #7d75bd;
+  color: #797e7e;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
   font-size: 25px;
   font-weight: 600;
   line-height: 30px;
   margin-right: auto;
-  margin-left: 3rem;
+  margin-left: 13px;
   margin-top: 25px;
   margin-bottom: 5px;
 }
@@ -41,20 +45,28 @@ h1 {
   font-weight: 500;
   font-size: 25px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: #7d75bd;
+  color: #797e7e;
 }
 
 .no-hover {
-  padding-top: 1.2rem;
+  padding-top: 12px;
 }
 
 .no-hover:hover {
-  background: lightslategrey;
+  background: #766182;
 }
 
 .last-label {
-  padding-top: 0.8rem;
-  padding-bottom: 0.8rem;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .mat-form-field-wrapper{
+  padding-bottom: 0;
 }
 
 mat-form-field mat-label {
@@ -65,13 +77,13 @@ mat-form-field mat-label {
 
 mat-form-field {
   background: #212529;
-  padding-top: 10px;
-  margin-top: 10px;
+  padding-top: 0px;
+  margin-top: 5px;
 }
 
 mat-form-field input {
   font-size: 15px;
-  margin-top: 1.5rem;
+  margin-top: 5px;
 }
 
 ::ng-deep .mat-form-field-label {
@@ -89,8 +101,8 @@ mat-form-field input {
 }
 
 .container {
-  margin-top: 2rem;
-  margin-left: 2.2rem;
+  margin-top: 20px;
+  margin-left: 0.05px;
   background: #262626;
 }
 
@@ -113,11 +125,11 @@ mat-form-field input {
 }
 
 .red{
-  color: #CF304A;
+  color: red;
 }
 
 .green{
-  color: #03A66D;
+  color: greenyellow;
 }
 
 .fw-bold {
@@ -137,7 +149,7 @@ mat-form-field input {
 
   mat-form-field input {
     font-size: 15px;
-    margin-top: 1.5rem;
+    margin-top: 15px;
   }
 
   .span-heading {
@@ -146,8 +158,8 @@ mat-form-field input {
   }
 
   .container {
-    margin-top: 1.5rem;
-    margin-left: 0.6rem;
+    margin-top: 15px;
+    margin-left: 0.8px;
   }
 
   .example-full-width {
@@ -155,6 +167,6 @@ mat-form-field input {
   }
 
   mat-slider {
-    width: 185px;
+    width: 175px;
   }
 }

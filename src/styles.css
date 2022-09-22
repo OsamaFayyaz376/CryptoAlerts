@@ -3,7 +3,7 @@
 html, body { height: 101%; }
 
 html{
-  font-size: 62.5%;
+  font-size: 20px;
 }
 
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -20,7 +20,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-slider-thumb {
   transform: scale(0) !important;
-  background-color: #7d75bd !important;
+  background-color: #766182 !important;
 }
 
 .mat-slider-thumb-label-text {
@@ -28,11 +28,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-accent .mat-slider-track-fill {
-  background-color: #7d75bd !important;
+  background-color: #766182 !important;
 }
 
 @media (max-width:500px) {
   html {
-    font-size: 50%;
+    font-size: 15px;
   }
 }
