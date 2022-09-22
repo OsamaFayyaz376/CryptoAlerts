@@ -34,20 +34,20 @@
 
   <div class="totalinvested background">
     <h1>Value Invested</h1>
-    <h2>{{totalPriceInvested.toFixed(2)}}</h2>
+    <h2 class="green2">{{totalPriceInvested.toFixed(2)}}</h2>
   </div>
 
-  <!--suppress ALL-->
   <div class="totalvalue background">
     <h1>Value Remaining</h1>
-    <h2>{{totalValue.toFixed(2)}}</h2>
+    <!--suppress ALL-->
+    <h2 [ngClass]="totalValue < totalPriceInvested ? 'red2' : 'green2'">{{totalValue.toFixed(2)}}</h2>
   </div>
 
-  <!--suppress ALL-->
   <div class="pnl background" >
     <h1 *ngIf="totalPNL < 0">Value Lost</h1>
     <h1 *ngIf="totalPNL > 0">Value Gained</h1>
-    <h2>{{totalPNL.toFixed(2)}}</h2>
+    <!--suppress ALL-->
+    <h2 [ngClass]="totalPNL < 0 ? 'red2' : 'green2'">{{totalPNL.toFixed(2)}}</h2>
   </div>
 
 </div>

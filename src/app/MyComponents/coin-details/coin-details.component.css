@@ -25,10 +25,6 @@ h1 {
   cursor: pointer;
 }
 
-.cross:hover {
-  background: red;
-}
-
 .big-heading {
   color: #797e7e;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
