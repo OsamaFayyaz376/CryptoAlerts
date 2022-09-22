@@ -7,6 +7,7 @@ import {TickerPrice} from "../../Models/TickerPrice";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Trade} from "../../Models/Trade";
 import {Subscription, timer} from "rxjs";
+import {FooterService} from "../../Services/footer.service";
 
 @Component({
   selector: 'app-map-coin',
@@ -23,10 +24,13 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   totalValue: number = 0;
   totalPNL: number = 0;
   currentSub: Subscription | undefined;
+  showSpinner: boolean = true;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient,
+              private footerService: FooterService) { }
 
   ngOnInit() {
+    this.footerService.hide();
     this.fetchCoin();
   }
 
@@ -42,6 +46,8 @@ export class MapCoinComponent implements OnInit, OnDestroy {
             this.fetchTickerPrices().subscribe(
               (tickerPrices: TickerPrice[]) => {
                 console.log("Fetching Prices");
+                this.showSpinner = false;
+                this.footerService.show();
                 this.prices = tickerPrices.filter(tickerPrice => this.investedPrices.find(investedPrice => investedPrice.symbol + "USDT" === tickerPrice.symbol))
                 this.mapCoin();
                 this.totalPriceInvested = this.calculateTotalInvestedPrice(this.investedPrices);
