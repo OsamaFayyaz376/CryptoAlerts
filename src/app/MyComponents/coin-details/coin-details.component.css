@@ -1,5 +1,18 @@
+html {
+  background: #262626;
+}
+
+body {
+  background: #262626;
+  color: white;
+}
+
 mat-slider {
   width: 300px;
+}
+
+nav {
+  visibility: hidden;
 }
 
 h1 {
@@ -12,33 +25,30 @@ h1 {
 }
 
 .big-heading {
-  color: black;
+  color: #7d75bd;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 50px;
+  font-size: 25px;
   font-weight: 600;
   line-height: 30px;
-  margin: 40px auto 25px;
+  margin-right: auto;
   margin-left: 3rem;
   margin-top: 25px;
-}
-.big-heading span {
-  border-bottom: 2px solid black;
-  padding-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .span-heading {
   font-weight: 500;
   font-size: 25px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: black;
+  color: #7d75bd;
 }
 
 .no-hover {
-  padding-top: 0.8rem;
+  padding-top: 1.2rem;
 }
 
 .no-hover:hover {
-  background: #cdcdcd;
+  background: lightslategrey;
 }
 
 .last-label {
@@ -47,17 +57,20 @@ h1 {
 }
 
 mat-form-field mat-label {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: bolder !important;
+  color: white;
 }
 
 mat-form-field {
-  background: white;
+  background: #212529;
+  padding-top: 10px;
+  margin-top: 10px;
 }
 
 mat-form-field input {
-  font-size: 22px;
-  margin-top: 2.5rem;
+  font-size: 15px;
+  margin-top: 1.5rem;
 }
 
 ::ng-deep .mat-form-field-label {
@@ -75,33 +88,27 @@ mat-form-field input {
 }
 
 .container {
-  margin-top: 4rem;
+  margin-top: 2rem;
   margin-left: 2.2rem;
+  background: #262626;
 }
 
 .slider {
   margin-top: 15px;
 }
 
-.large {
-  font-size: 20px;
-  margin-top: 1rem;
-  margin-left: 0.3rem;
-  background: orangered;
-}
-
-.large:hover {
-  background: red;
-}
-
 .example-form {
-  min-width: 150px;
+  min-width: 100px;
   max-width: 500px;
   width: 100%;
 }
 
 .example-full-width {
   width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 2px solid black;
+  margin-bottom: 15px;
 }
 
 .red{
@@ -122,13 +129,13 @@ mat-form-field input {
   }
 
   mat-form-field mat-label {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: bolder !important;
   }
 
   mat-form-field input {
-    font-size: 20px;
-    margin-top: 2rem;
+    font-size: 15px;
+    margin-top: 1.5rem;
   }
 
   .span-heading {
@@ -143,5 +150,9 @@ mat-form-field input {
   .container {
     margin-top: 1.5rem;
     margin-left: 0.6rem;
+  }
+
+  .example-full-width {
+    width: 80%;
   }
 }

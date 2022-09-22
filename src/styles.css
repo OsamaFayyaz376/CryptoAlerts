@@ -11,12 +11,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .mat-slider-thumb-label {
   transform: rotate(45deg) !important;
   border-radius: 50% 50% 0 !important;
-  background-color: black !important;
+  background-color: #7d75bd !important;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline{
+  color: #262626;
 }
 
 .mat-slider-thumb {
   transform: scale(0) !important;
-  background-color: black !important;
+  background-color: #7d75bd !important;
 }
 
 .mat-slider-thumb-label-text {
@@ -24,9 +28,8 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .mat-accent .mat-slider-track-fill {
-  background-color: black !important;
+  background-color: #7d75bd !important;
 }
-
 
 @media (max-width:500px) {
   html {

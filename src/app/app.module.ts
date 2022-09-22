@@ -13,13 +13,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatSliderModule} from "@angular/material/slider";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import { ProfitCalculatorComponent } from './MyComponents/profit-calculator/profit-calculator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayPriceComponent,
     CoinDetailsComponent,
-    MapCoinComponent
+    MapCoinComponent,
+    ProfitCalculatorComponent
   ],
   imports: [
     BrowserModule,

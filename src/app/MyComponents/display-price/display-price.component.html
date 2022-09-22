@@ -1,6 +1,6 @@
 <table *ngIf="showTable" class="table table-bordered table-hover">
 
-  <thead class="table-dark">
+  <thead class="black">
     <tr>
       <th scope="col">Coin</th>
       <th scope="col">Invested Value ($)</th>
@@ -11,14 +11,15 @@
     </tr>
   </thead>
 
-  <tbody>
+  <tbody class="table-dark">
 
-    <!--suppress ALL-->
-    <tr *ngFor="let coin of data" (click)="showDetails(coin)" [ngClass]="coin.pnl < 0 ? 'table-danger' : 'table-success'">
+    <tr *ngFor="let coin of data" (click)="showDetails(coin)">
       <th scope="row">{{coin.symbol}}</th>
       <td>{{coin.investedPrice.toFixed(3)}}</td>
-      <td>{{coin.currentValue.toFixed(3)}}</td>
-      <td>{{coin.pnl.toFixed(3)}}</td>
+      <!--suppress ALL-->
+      <td [ngClass]="coin.currentValue < coin.investedPrice ? 'red2' : 'green2'">{{coin.currentValue.toFixed(3)}}</td>
+      <!--suppress ALL-->
+      <td [ngClass]="coin.pnl < 0 ? 'red2' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
       <td>{{coin.currentPrice}}</td>
       <td>{{coin.quantity}}</td>
     </tr>

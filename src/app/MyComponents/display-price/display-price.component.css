@@ -20,6 +20,19 @@
   background: #D1E7DD;
 }
 
+.red2{
+  color: #F8D7DA;
+}
+
+.green2{
+  color: #D1E7DD;
+}
+
+.black {
+  background: black;
+  color: white;
+}
+
 .pnl{
   border: 2px solid black;
 }

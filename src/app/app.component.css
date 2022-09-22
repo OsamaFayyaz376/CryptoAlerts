@@ -1,1 +1,36 @@
+html {
+  background: #262626;
+  font-size: 15px;
+}
+
+nav {
+  height: 70px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  text-decoration: white;
+  background-color: black;
+}
+
+.navbar-brand {
+  padding-left: 10px;
+  padding-right: 50px;
+  padding-top: 10px;
+  font-size: 30px;
+  color: white;
+}
+
+.nav-link {
+  padding-top: 10px;
+  padding-left: 20px;
+  color: white;
+}
+
+.nav-item {
+  padding-left: 20px;
+  padding-top: 7px;
+}
+
+.nav-link:hover {
+  color: grey;
+}
 
