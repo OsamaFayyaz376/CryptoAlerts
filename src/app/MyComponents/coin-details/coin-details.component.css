@@ -1,5 +1,6 @@
 html {
   background: #262626;
+  height: 101%;
 }
 
 body {
@@ -126,6 +127,7 @@ mat-form-field input {
 @media (max-width:500px) {
   .big-heading {
     font-size: 25px;
+    margin-left: 10px;
   }
 
   mat-form-field mat-label {
@@ -143,16 +145,16 @@ mat-form-field input {
     font-size: 20px;
   }
 
-  .slider {
-    margin-top: 13px;
-  }
-
   .container {
     margin-top: 1.5rem;
     margin-left: 0.6rem;
   }
 
   .example-full-width {
-    width: 80%;
+    width: 100%;
+  }
+
+  mat-slider {
+    width: 185px;
   }
 }

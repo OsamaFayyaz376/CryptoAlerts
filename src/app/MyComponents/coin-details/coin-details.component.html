@@ -50,7 +50,7 @@
     <mat-form-field class="example-full-width last-label" appearance="fill">
       <mat-label>Add Custom Price</mat-label>
       <!--suppress ALL-->
-      <input matInput type="number" step="0.01" placeholder="Price" value=0 #txtVal (keyup)="keyup(txtVal.value)">
+      <input matInput type="number" step="0.01" placeholder="Price" value={{idealPrice.toFixed(2)}} #txtVal (keyup)="keyup(txtVal.value)">
     </mat-form-field>
   </form>
 
@@ -66,7 +66,6 @@
               aria-label="units"></mat-slider>
 
 </div>
-
 
 </body>
 

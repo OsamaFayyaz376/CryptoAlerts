@@ -1,3 +1,7 @@
+html {
+  background: #262626;
+}
+
 .container {
   margin-top: 50px;
   display: flex;
@@ -13,19 +17,19 @@
 }
 
 .red{
-  background: #F8D7DA;
+  background: #CF304A;
 }
 
 .green{
-  background: #D1E7DD;
+  background: #03A66D;
 }
 
 .red2{
-  color: #F8D7DA;
+  color: #CF304A;
 }
 
 .green2{
-  color: #D1E7DD;
+  color: #03A66D;
 }
 
 .black {
@@ -39,5 +43,23 @@
 
 h1, h2{
   margin: 15px;
+}
+
+@media (max-width:500px) {
+  .container {
+    margin-top: 45px;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  h1, h2{
+    margin: 0;
+    font-size: 15px;
+    padding-left: 5px;
+  }
+
+  html {
+    height: 85% !important;
+  }
 }
 

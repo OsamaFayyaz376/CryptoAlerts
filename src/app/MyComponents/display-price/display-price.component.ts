@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Coin} from "../../Models/Coin";
 import {Router} from "@angular/router";
 
@@ -12,6 +12,7 @@ export class DisplayPriceComponent implements OnInit {
   @Input() totalPriceInvested: number = 0;
   @Input() totalValue: number = 0;
   @Input() totalPNL: number = 0;
+  @Output() showNoFooter: EventEmitter<any> = new EventEmitter();
   showTable: boolean = true;
   // @ts-ignore
   coin: Coin;
@@ -31,3 +32,4 @@ export class DisplayPriceComponent implements OnInit {
     this.showTable = true;
   }
 }
+

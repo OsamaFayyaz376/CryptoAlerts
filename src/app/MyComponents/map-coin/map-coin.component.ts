@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnDestroy, OnInit, Output} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {Coin} from "../../Models/Coin";
 import {InvestedPrice} from "../../Models/InvestedPrice";
@@ -126,12 +126,12 @@ export class MapCoinComponent implements OnInit, OnDestroy {
     this.portfolio.forEach(portfolio => {
       coin = new Coin();
       coin.symbol = portfolio.asset;
-      coin.currentPrice = this.prices.find(price => {
+      coin.currentPrice = Number(Number(this.prices.find(price => {
         if (portfolio.asset != "USDT") {
           return price.symbol === portfolio.asset + "USDT"
         }
         return price.symbol === "USDC" + portfolio.asset;
-      })?.price ?? 0;
+      })?.price).toFixed(5)) ?? 0;
       if(!coin.currentPrice) {
         coin.currentPrice = 0;
       }
@@ -144,5 +144,4 @@ export class MapCoinComponent implements OnInit, OnDestroy {
       }
     })
   }
-
 }

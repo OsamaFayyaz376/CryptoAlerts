@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {Coin} from "../../Models/Coin";
 import {MatSliderChange} from "@angular/material/slider";
+import {FooterService} from "../../Services/footer.service";
 
 @Component({
   selector: 'app-coin-details',
@@ -17,9 +18,10 @@ export class CoinDetailsComponent implements OnInit {
   currentValue: number = 0;
   pnl: number = 0;
 
-  constructor() { }
+  constructor(private footerService: FooterService) { }
 
   ngOnInit(): void {
+    this.footerService.hide();
     this.idealPrice = this.coin.investedPrice / this.coin.quantity;
     this.investedPrice = this.coin.investedPrice;
     this.coinQuantity = this.coin.quantity;
@@ -28,6 +30,7 @@ export class CoinDetailsComponent implements OnInit {
   }
 
   onClick() {
+    this.footerService.show();
     this.close.emit();
   }
 

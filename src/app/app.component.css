@@ -1,5 +1,10 @@
+html, body {
+  height: 100% !important;
+}
+
 html {
   background: #262626;
+  background-color: #262626;
   font-size: 15px;
 }
 
@@ -12,7 +17,7 @@ nav {
 }
 
 .navbar-brand {
-  padding-left: 10px;
+  padding-left: 30px;
   padding-right: 50px;
   padding-top: 10px;
   font-size: 30px;
@@ -32,5 +37,32 @@ nav {
 
 .nav-link:hover {
   color: grey;
+}
+
+@media (max-width:500px) {
+
+  html {
+    font-size: 50%;
+  }
+
+  nav {
+    height: 50px;
+    font-size: 10px;
+    width: 100%;
+  }
+
+  .navbar-brand {
+    font-size: 15px;
+    padding: 0 0 0 10px;
+  }
+
+  .nav-link {
+    padding: 0;
+  }
+
+  .nav-item {
+    padding: 0;
+  }
+
 }
 
