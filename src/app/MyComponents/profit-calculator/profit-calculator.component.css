@@ -85,4 +85,8 @@ mat-form-field input {
     width: 90%;
     margin-left: 35px;
   }
+
+  table {
+    font-size: 15px;
+  }
 }
