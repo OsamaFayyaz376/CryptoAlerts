@@ -15,6 +15,7 @@ import {MatInputModule} from "@angular/material/input";
 import { ProfitCalculatorComponent } from './MyComponents/profit-calculator/profit-calculator.component';
 import { FooterComponent } from './MyComponents/footer/footer.component';
 import {FooterService} from "./Services/footer.service";
+import {ApiService} from "./Services/api.service";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {FooterService} from "./Services/footer.service";
     MatInputModule
   ],
   providers: [
+    ApiService,
     FooterService,
   ],
   bootstrap: [AppComponent]

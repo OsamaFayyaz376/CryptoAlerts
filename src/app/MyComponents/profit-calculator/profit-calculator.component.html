@@ -1,1 +1,38 @@
-<p>profit-calculator works!</p>
+<form class="example-form">
+
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Enter The Amount You Want To Invest ($)</mat-label>
+    <!--suppress ALL-->
+    <input matInput type="number" step="10" placeholder="Price" value=100 #txtVal (keyup)="getInvestedPrice(txtVal.value)">
+  </mat-form-field>
+
+</form>
+
+<table class="table table-bordered table-hover">
+
+  <thead class="black">
+  <tr>
+    <th scope="col">Coin</th>
+    <th scope="col">Quantity</th>
+    <th scope="col">Current Price ($)</th>
+    <th scope="col">Custom Price ($)</th>
+    <th scope="col">PNL ($)</th>
+  </tr>
+  </thead>
+
+  <tbody class="table-dark">
+
+  <tr *ngFor="let coin of predictedCoins">
+    <th scope="row">{{coin.symbol}}</th>
+    <td>{{coin.initialWorth.toFixed(3)}}</td>
+    <td>{{coin.currentPrice}}</td>
+    <td contentEditable (keyup)="getCustomPrice(coin,$event)">{{coin.customPrice}}</td>
+    <!--suppress ALL-->
+    <td [ngClass]="coin.pnl < 0 ? 'red2' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
+  </tr>
+
+  </tbody>
+
+</table>
+
+

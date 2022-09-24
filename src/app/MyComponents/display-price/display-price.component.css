@@ -1,5 +1,5 @@
 html {
-  background: #262626;
+  background: #202c33;
 }
 
 .container {
@@ -32,6 +32,15 @@ html {
   color: #03A66D;
 }
 
+.docker {
+  background: #14222b;
+  color: #c7cacc;
+}
+
+.docker2 {
+  color: #c7cacc;
+}
+
 .black {
   background: black;
   color: white;
@@ -39,7 +48,7 @@ html {
 
 .background {
   background: #212529;
-  color: white;
+  color: #c7cacc;
 }
 
 .pnl{

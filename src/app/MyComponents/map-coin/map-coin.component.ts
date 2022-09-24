@@ -8,6 +8,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Trade} from "../../Models/Trade";
 import {Subscription, timer} from "rxjs";
 import {FooterService} from "../../Services/footer.service";
+import {ApiService} from "../../Services/api.service";
 
 @Component({
   selector: 'app-map-coin',
@@ -15,7 +16,6 @@ import {FooterService} from "../../Services/footer.service";
   styleUrls: ['./map-coin.component.css']
 })
 export class MapCoinComponent implements OnInit, OnDestroy {
-  url: string = environment.baseUrl;
   coins: Coin[] = [];
   investedPrices: InvestedPrice[] = [];
   portfolio: Portfolio[] = [];
@@ -26,8 +26,8 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   currentSub: Subscription | undefined;
   showSpinner: boolean = true;
 
-  constructor(private http: HttpClient,
-              private footerService: FooterService) { }
+  constructor(private footerService: FooterService,
+              private apiService: ApiService) { }
 
   ngOnInit() {
     this.footerService.hide();
@@ -43,9 +43,8 @@ export class MapCoinComponent implements OnInit, OnDestroy {
       this.fetchInvestedPrices(() => {
         this.currentSub = timer(1000, 1800).subscribe(
           () => {
-            this.fetchTickerPrices().subscribe(
+            this.apiService.fetchTickerPrices().subscribe(
               (tickerPrices: TickerPrice[]) => {
-                console.log("Fetching Prices");
                 this.showSpinner = false;
                 this.footerService.show();
                 this.prices = tickerPrices.filter(tickerPrice => this.investedPrices.find(investedPrice => investedPrice.symbol + "USDT" === tickerPrice.symbol))
@@ -64,12 +63,8 @@ export class MapCoinComponent implements OnInit, OnDestroy {
     })
   }
 
-  fetchTickerPrices() {
-    return this.http.get<TickerPrice[]>(`${this.url}/coinprices`);
-  }
-
   fetchPortfolio(onSuccess: any) {
-    this.http.get<Portfolio[]>(`${this.url}/portfolio`).subscribe(
+    this.apiService.fetchPortfolio().subscribe(
       (response: Portfolio[]) => {
         this.portfolio = response;
         onSuccess();
@@ -83,7 +78,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   fetchInvestedPrices(onSuccess: any) {
     let investPrice: InvestedPrice;
     this.portfolio.forEach(portfolio => {
-      this.http.get<Trade[]>(`${this.url}/trade/${portfolio.asset+"USDT"}`).subscribe(
+      this.apiService.getTrade(portfolio.asset + "USDT").subscribe(
         (trades: Trade[]) => {
           investPrice = new InvestedPrice();
           investPrice.investedPrice = 0;

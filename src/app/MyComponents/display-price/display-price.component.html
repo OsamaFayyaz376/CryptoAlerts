@@ -2,7 +2,7 @@
 
 <table *ngIf="showTable" class="table table-bordered table-hover">
 
-  <thead class="black">
+  <thead class="docker">
   <tr>
     <th scope="col">Coin</th>
     <th scope="col">Invested Value ($)</th>
@@ -12,7 +12,7 @@
   </tr>
   </thead>
 
-  <tbody class="table-dark">
+  <tbody class="table-dark docker2">
 
   <tr *ngFor="let coin of data" (click)="showDetails(coin)">
     <th scope="row">{{coin.symbol}}</th>

@@ -3,17 +3,17 @@ html, body {
 }
 
 html {
-  background: #262626;
-  background-color: #262626;
+  background: #202c33;
+  background-color: #202c33;
   font-size: 15px;
 }
 
 nav {
   height: 70px;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-size: 20px;
-  text-decoration: white;
-  background-color: black;
+  text-decoration: #3477ae;
+  background-color: #14222b;
 }
 
 .navbar-brand {
@@ -21,13 +21,13 @@ nav {
   padding-right: 50px;
   padding-top: 10px;
   font-size: 30px;
-  color: white;
+  color: #c7cacc;
 }
 
 .nav-link {
   padding-top: 10px;
   padding-left: 20px;
-  color: white;
+  color: #c7cacc;
 }
 
 .nav-item {

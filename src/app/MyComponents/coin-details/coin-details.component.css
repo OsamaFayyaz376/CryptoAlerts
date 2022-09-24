@@ -1,10 +1,10 @@
 html {
-  background: #262626;
+  background: #202c33;
   height: 101%;
 }
 
 body {
-  background: #262626;
+  background: #202c33;
   color: white;
 }
 
@@ -26,9 +26,9 @@ h1 {
 }
 
 .big-heading {
-  color: #797e7e;
+  color: #8cabb2;
   font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 600;
   line-height: 30px;
   margin-right: auto;
@@ -39,9 +39,9 @@ h1 {
 
 .span-heading {
   font-weight: 500;
-  font-size: 25px;
+  font-size: 20px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  color: #797e7e;
+  color: #8cabb2;
 }
 
 .no-hover {
@@ -68,11 +68,11 @@ h1 {
 mat-form-field mat-label {
   font-size: 20px;
   font-weight: bolder !important;
-  color: white;
+  color: #c7cacc;
 }
 
 mat-form-field {
-  background: #212529;
+  background: #14222b;
   padding-top: 0px;
   margin-top: 5px;
 }
@@ -99,7 +99,15 @@ mat-form-field input {
 .container {
   margin-top: 20px;
   margin-left: 0.05px;
-  background: #262626;
+  background: #202c33;
+}
+
+.space_lg {
+  margin-left:320px;
+}
+
+mat-slider {
+  mar: 338px;
 }
 
 .slider {
@@ -133,8 +141,12 @@ mat-form-field input {
 }
 
 @media (max-width:500px) {
+  .space_lg {
+    margin-left: 230px;
+  }
+
   .big-heading {
-    font-size: 25px;
+    font-size: 20px;
     margin-left: 10px;
   }
 
