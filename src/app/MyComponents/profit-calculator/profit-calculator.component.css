@@ -3,6 +3,14 @@
   color: #c7cacc;
 }
 
+.red2{
+  color: #CF304A;
+}
+
+.green2{
+  color: #03A66D;
+}
+
 ::ng-deep .mat-form-field-underline {
   display: none;
 }
@@ -68,6 +76,13 @@ mat-form-field input {
   }
 
   .example-full-width {
-    width: 100%;
+    width: 90%;
+  }
+
+  .example-form {
+    min-width: 100px;
+    max-width: 500px;
+    width: 90%;
+    margin-left: 35px;
   }
 }
