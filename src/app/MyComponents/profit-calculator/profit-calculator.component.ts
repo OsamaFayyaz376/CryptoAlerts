@@ -81,7 +81,7 @@ export class ProfitCalculatorComponent implements OnInit {
     this.predictedCoins.forEach(coin => {
       coin.initialWorth = this.investedPrice / coin.currentPrice;
       coin.currentWorth = coin.initialWorth * coin.customPrice;
-      coin.pnl = coin.currentWorth - this.investedPrice;
+      coin.pnl = coin.customPrice === 0 ? 0 : coin.currentWorth - this.investedPrice;
     })
   }
 

@@ -28,7 +28,7 @@
     <td>{{coin.currentPrice}}</td>
     <td contentEditable (keyup)="getCustomPrice(coin,$event)">{{coin.customPrice}}</td>
     <!--suppress ALL-->
-    <td [ngClass]="coin.pnl < 0 ? 'red2' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
+    <td [ngClass]="coin.pnl < 0 ? 'red2' : coin.pnl === 0 ? 'white' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
   </tr>
 
   </tbody>
