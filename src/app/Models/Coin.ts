@@ -5,4 +5,5 @@ export class Coin {
   currentValue!: number;
   pnl!: number;
   quantity!: number;
+  change!: number;
 }

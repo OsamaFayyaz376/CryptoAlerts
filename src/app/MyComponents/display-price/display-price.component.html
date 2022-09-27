@@ -9,6 +9,7 @@
     <th scope="col">Current Value ($)</th>
     <th scope="col">PNL ($)</th>
     <th scope="col">Current Price ($)</th>
+    <th scope="col">24h Change</th>
   </tr>
   </thead>
 
@@ -22,6 +23,8 @@
     <!--suppress ALL-->
     <td [ngClass]="coin.pnl < 0 ? 'red2' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
     <td>{{coin.currentPrice}}</td>
+    <!--suppress ALL-->
+    <td [ngClass]="coin.change < 0 ? 'red2' : 'green2'">{{coin.change}}%</td>
   </tr>
 
   </tbody>

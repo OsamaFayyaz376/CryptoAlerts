@@ -9,6 +9,7 @@ import {Trade} from "../../Models/Trade";
 import {Subscription, timer} from "rxjs";
 import {FooterService} from "../../Services/footer.service";
 import {ApiService} from "../../Services/api.service";
+import {TickerStatistic} from "../../Models/TickerStatistic";
 
 @Component({
   selector: 'app-map-coin',
@@ -20,11 +21,13 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   investedPrices: InvestedPrice[] = [];
   portfolio: Portfolio[] = [];
   prices: TickerPrice[] = [];
+  tickerStats: TickerStatistic[] = [];
   totalPriceInvested: number = 0;
   totalValue: number = 0;
   totalPNL: number = 0;
   currentSub: Subscription | undefined;
   showSpinner: boolean = true;
+  USDTPrice: number = 0;
 
   constructor(private footerService: FooterService,
               private apiService: ApiService) { }
@@ -41,27 +44,46 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   fetchCoin() {
     this.fetchPortfolio(() => {
       this.fetchInvestedPrices(() => {
-        this.currentSub = timer(1000, 1800).subscribe(
+        this.currentSub = timer(1000, 2200).subscribe(
           () => {
-            this.apiService.fetchTickerPrices().subscribe(
-              (tickerPrices: TickerPrice[]) => {
-                this.showSpinner = false;
-                this.footerService.show();
-                this.prices = tickerPrices.filter(tickerPrice => this.investedPrices.find(investedPrice => investedPrice.symbol + "USDT" === tickerPrice.symbol))
-                this.mapCoin();
-                this.totalPriceInvested = this.calculateTotalInvestedPrice(this.investedPrices);
-                this.totalValue = this.calculateTotalValue(this.coins);
-                this.totalPNL = this.calculateTotalPNL(this.coins);
-              },
-              (error: HttpErrorResponse) => {
-                alert("Error in fetching portfolio")
-              }
-            );
-          }
-        )
+            this.getFilteredPrices(() => {
+              this.mapCoin();
+              this.totalPriceInvested = this.calculateTotalInvestedPrice(this.investedPrices) + Number(this.USDTPrice);
+              this.totalValue = this.calculateTotalValue(this.coins);
+              this.totalPNL = this.calculateTotalPNL(this.coins);
+            });
+          })
       })
     })
   }
+
+  getFilteredPrices(onSuccess: any) {
+    let counter = 0;
+     this.portfolio.forEach(portfolio => {
+       if (portfolio.asset != "USDT" && portfolio.asset != "ETHW") {
+        this.apiService.getTickerStatistic(portfolio.asset + "USDT").subscribe(
+          (tickerStats: TickerStatistic) => {
+            this.tickerStats.push(tickerStats);
+          }
+        )
+      } else if (portfolio.asset === "USDT") {
+        // @ts-ignore
+         this.USDTPrice = portfolio.free;
+        this.apiService.getTickerStatistic("USDC" + portfolio.asset).subscribe(
+          (tickerStats: TickerStatistic) => {
+            this.tickerStats.push(tickerStats);
+          }
+        )
+      }
+
+     counter++;
+     if(counter === this.portfolio.length) {
+       onSuccess();
+     }
+
+    });
+  }
+
 
   fetchPortfolio(onSuccess: any) {
     this.apiService.fetchPortfolio().subscribe(
@@ -123,25 +145,42 @@ export class MapCoinComponent implements OnInit, OnDestroy {
 
   private mapCoin() {
     let coin: Coin;
+    let tickerStatatistic: TickerStatistic;
+    let counter = 0;
     this.coins = [];
     this.portfolio.forEach(portfolio => {
+
+      if(portfolio.asset != "USDT") {
+        // @ts-ignore
+        tickerStatatistic = this.tickerStats.find(tickerStat => tickerStat.symbol === portfolio.asset + "USDT");
+      } else {
+        // @ts-ignore
+        tickerStatatistic = this.tickerStats.find(tickerStat => tickerStat.symbol === "USDC" + portfolio.asset);
+      }
+
       coin = new Coin();
       coin.symbol = portfolio.asset;
-      coin.currentPrice = Number(Number(this.prices.find(price => {
-        if (portfolio.asset != "USDT") {
-          return price.symbol === portfolio.asset + "USDT"
-        }
-        return price.symbol === "USDC" + portfolio.asset;
-      })?.price).toFixed(5)) ?? 0;
+      coin.currentPrice = Number(Number(tickerStatatistic?.price).toFixed(5));
+
       if(!coin.currentPrice) {
         coin.currentPrice = 0;
       }
+
+      coin.change = tickerStatatistic?.change;
       coin.quantity = Number(portfolio.free) + Number(portfolio.locked);
-      coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice ?? 0;
       coin.currentValue = Number(coin.currentPrice) * Number(coin.quantity);
+      coin.symbol !== "USDT" ? coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice ?? 0 : coin.investedPrice = coin.currentValue;
       coin.pnl = Number(coin.currentValue) - Number(coin.investedPrice);
-      if (coin.investedPrice) {
+
+      if (coin.investedPrice || coin.symbol === "USDT") {
         this.coins.push(coin);
+      }
+
+      counter++;
+      if(counter === this.portfolio.length) {
+        this.tickerStats = [];
+        this.showSpinner = false;
+        this.footerService.show();
       }
     })
   }
