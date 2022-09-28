@@ -33,6 +33,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 @media (max-width:500px) {
   html {
-    font-size: 14.5px;
+    font-size: 14.3px;
   }
 }
