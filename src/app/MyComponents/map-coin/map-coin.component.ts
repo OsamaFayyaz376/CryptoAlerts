@@ -47,7 +47,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
         this.currentSub = timer(1000, 2200).subscribe(
           () => {
             this.getFilteredPrices(() => {
-              this.mapCoin();
+              this.mapCoins();
               this.totalPriceInvested = this.calculateTotalInvestedPrice(this.investedPrices) + Number(this.USDTPrice);
               this.totalValue = this.calculateTotalValue(this.coins);
               this.totalPNL = this.calculateTotalPNL(this.coins);
@@ -58,7 +58,6 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   }
 
   getFilteredPrices(onSuccess: any) {
-    let counter = 0;
      this.portfolio.forEach(portfolio => {
        if (portfolio.asset != "USDT" && portfolio.asset != "ETHW") {
         this.apiService.getTickerStatistic(portfolio.asset + "USDT").subscribe(
@@ -75,13 +74,11 @@ export class MapCoinComponent implements OnInit, OnDestroy {
           }
         )
       }
-
-     counter++;
-     if(counter === this.portfolio.length) {
-       onSuccess();
-     }
-
     });
+
+    if(this.tickerStats.length === this.portfolio.length - 1) {
+      onSuccess();
+    }
   }
 
 
@@ -99,9 +96,11 @@ export class MapCoinComponent implements OnInit, OnDestroy {
 
   fetchInvestedPrices(onSuccess: any) {
     let investPrice: InvestedPrice;
+    let counter: number = 0;
     this.portfolio.forEach(portfolio => {
       this.apiService.getTrade(portfolio.asset + "USDT").subscribe(
         (trades: Trade[]) => {
+          counter = 0;
           investPrice = new InvestedPrice();
           investPrice.investedPrice = 0;
           trades.forEach(trade => {
@@ -109,9 +108,24 @@ export class MapCoinComponent implements OnInit, OnDestroy {
               // @ts-ignore
               investPrice.investedPrice = Number(investPrice.investedPrice) + Number(trade.quoteQty);
             } else {
+              let index = (counter+trades.length-1)%trades.length;
+              let previousTrade = trades[index];
+              let doublePreviousTrade = trades[index-1];
               // @ts-ignore
-              investPrice.investedPrice = Number(investPrice.investedPrice) - Number(trade.quoteQty);
+              if (previousTrade.isBuyer && Math.trunc(previousTrade.qty) === Math.trunc(trade.qty) && Math.trunc(trade.quoteQty) >= Math.trunc(previousTrade.quoteQty)) {
+                investPrice.investedPrice = Number(investPrice.investedPrice) - Number(previousTrade.quoteQty);
+              } else if (!previousTrade.isBuyer && doublePreviousTrade.isBuyer && (Math.trunc(Number(previousTrade.qty))+Math.trunc(Number(trade.qty)) === Math.trunc(Number(doublePreviousTrade.qty)) ||
+                Math.trunc(Number(previousTrade.qty))+Math.trunc(Number(trade.qty)) === Math.trunc(Number(doublePreviousTrade.qty)-1))) {
+                investPrice.investedPrice = (Number(investPrice.investedPrice) + Number(previousTrade.quoteQty)) - Number(doublePreviousTrade.quoteQty);
+                if (Number(Number(investPrice.investedPrice).toFixed(2)) == 0.00) {
+                  investPrice.investedPrice = 0;
+                }
+              } else {
+                // @ts-ignore
+                investPrice.investedPrice = Number(investPrice.investedPrice) - Number(trade.quoteQty);
+              }
             }
+            counter++;
           })
           investPrice.symbol = portfolio.asset;
           this.investedPrices.push(investPrice);
@@ -143,7 +157,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   }
 
 
-  private mapCoin() {
+  private mapCoins() {
     let coin: Coin;
     let tickerStatatistic: TickerStatistic;
     let counter = 0;
@@ -182,6 +196,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
         this.showSpinner = false;
         this.footerService.show();
       }
+
     })
   }
 }
