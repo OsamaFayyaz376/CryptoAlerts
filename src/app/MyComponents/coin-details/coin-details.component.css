@@ -140,6 +140,10 @@ mat-slider {
   font-weight: bold;
 }
 
+.center {
+
+}
+
 @media (max-width:500px) {
   .space_lg {
     margin-left: 220px;

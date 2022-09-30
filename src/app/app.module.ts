@@ -16,6 +16,7 @@ import { ProfitCalculatorComponent } from './MyComponents/profit-calculator/prof
 import { FooterComponent } from './MyComponents/footer/footer.component';
 import {FooterService} from "./Services/footer.service";
 import {ApiService} from "./Services/api.service";
+import {MatButtonModule} from "@angular/material/button";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {ApiService} from "./Services/api.service";
     BrowserAnimationsModule,
     MatSliderModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ],
   providers: [
     ApiService,

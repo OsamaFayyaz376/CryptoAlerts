@@ -10,6 +10,7 @@ import {Subscription, timer} from "rxjs";
 import {FooterService} from "../../Services/footer.service";
 import {ApiService} from "../../Services/api.service";
 import {TickerStatistic} from "../../Models/TickerStatistic";
+import {symbols} from "ansi-colors";
 
 @Component({
   selector: 'app-map-coin',
@@ -22,6 +23,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   portfolio: Portfolio[] = [];
   prices: TickerPrice[] = [];
   tickerStats: TickerStatistic[] = [];
+  symbols: string[] = [];
   totalPriceInvested: number = 0;
   totalValue: number = 0;
   totalPNL: number = 0;
@@ -58,24 +60,11 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   }
 
   getFilteredPrices(onSuccess: any) {
-     this.portfolio.forEach(portfolio => {
-       if (portfolio.asset != "USDT" && portfolio.asset != "ETHW") {
-        this.apiService.getTickerStatistic(portfolio.asset + "USDT").subscribe(
-          (tickerStats: TickerStatistic) => {
-            this.tickerStats.push(tickerStats);
-          }
-        )
-      } else if (portfolio.asset === "USDT") {
-        // @ts-ignore
-         this.USDTPrice = portfolio.free;
-        this.apiService.getTickerStatistic("USDC" + portfolio.asset).subscribe(
-          (tickerStats: TickerStatistic) => {
-            this.tickerStats.push(tickerStats);
-          }
-        )
+    this.apiService.getTickerStatistic(this.symbols).subscribe(
+      (tickerStats: TickerStatistic[]) => {
+        this.tickerStats = tickerStats;
       }
-    });
-
+    )
     if(this.tickerStats.length === this.portfolio.length - 1) {
       onSuccess();
     }
@@ -86,6 +75,15 @@ export class MapCoinComponent implements OnInit, OnDestroy {
     this.apiService.fetchPortfolio().subscribe(
       (response: Portfolio[]) => {
         this.portfolio = response;
+        this.portfolio.forEach(portfolio => {
+          if (portfolio.asset != "ETHW" && portfolio.asset != "USDT") {
+            this.symbols.push(portfolio.asset + "USDT");
+          } else if (portfolio.asset === "USDT") {
+            // @ts-ignore
+            this.USDTPrice = portfolio.free;
+            this.symbols.push("USDC" + portfolio.asset);
+          }
+        })
         onSuccess();
       },
       (error: HttpErrorResponse) => {
