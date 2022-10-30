@@ -22,6 +22,7 @@ export class ViewTransactionHistoryComponent implements OnInit, OnDestroy {
   tickerPrice: TickerPrice = null;
   pnl: number = 0;
   pnlPercentage: number = 0;
+  renderTable: boolean = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -43,6 +44,7 @@ export class ViewTransactionHistoryComponent implements OnInit, OnDestroy {
         } else {
           this.tickerPrice.price = Number(Number(this.tickerPrice.price).toFixed(4));
         }
+        this.renderTable = true;
       }
     )
   }

@@ -1,37 +1,47 @@
-<h1 class="big-heading">
-  <span>{{coin.symbol}} TRADE HISTORY</span>
+<span *ngIf="!renderTable" class="loader">
+  <span class="loader-inner"></span>
+</span>
+<div *ngIf="!renderTable" class="label">Fetching Trades...</div>
+
+<div *ngIf="renderTable">
+
+  <h1 class="big-heading">
+    <span>{{coin.symbol}} TRADE HISTORY</span>
   </h1>
 
-<table class="table table-bordered table-hover my-5">
+  <table *ngIf="renderTable" class="table table-bordered table-hover my-5">
 
-  <thead class="docker">
-  <tr>
-    <th scope="col">Initial Value</th>
-    <th scope="col">Initial &nbsp; Price</th>
-    <th scope="col">Current Value</th>
-    <th scope="col">Current Price</th>
-    <th scope="col">PNL</th>
-    <th scope="col">PNL%</th>
-  </tr>
-  </thead>
+    <thead class="docker">
+    <tr>
+      <th scope="col">Initial Value</th>
+      <th scope="col">Initial &nbsp; Price</th>
+      <th scope="col">Current Value</th>
+      <th scope="col">Current Price</th>
+      <th scope="col">PNL</th>
+      <th scope="col">PNL%</th>
+    </tr>
+    </thead>
 
-  <tbody class="table-dark docker2">
+    <tbody class="table-dark docker2">
 
-  <tr *ngFor="let trade of trades">
-    <td>${{getTradeQuantity(trade)}}</td>
-    <td>${{getTradePrice(trade)}}</td>
-    <td>${{getTradeCurrentValue(trade, coin)}}</td>
-    <td>${{this.tickerPrice.price}}</td>
-    <!--suppress ALL-->
-    <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getTradePNL(trade, coin)}}</td>
-    <!--suppress ALL-->
-    <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getPercentage(trade, coin)}}%</td>
-  </tr>
+    <tr *ngFor="let trade of trades">
+      <td>${{getTradeQuantity(trade)}}</td>
+      <td>${{getTradePrice(trade)}}</td>
+      <td>${{getTradeCurrentValue(trade, coin)}}</td>
+      <td>${{this.tickerPrice.price}}</td>
+      <!--suppress ALL-->
+      <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getTradePNL(trade, coin)}}</td>
+      <!--suppress ALL-->
+      <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getPercentage(trade, coin)}}%</td>
+    </tr>
 
-  </tbody>
+    </tbody>
 
-</table>
+  </table>
 
-<div class="center">
-  <button (click)="showCoinDetails()" mat-raised-button class="history-btn">Go Back to Coin Details</button>
+  <div class="center">
+    <button (click)="showCoinDetails()" mat-raised-button class="history-btn">Go Back to Coin Details</button>
+  </div>
+
 </div>
+

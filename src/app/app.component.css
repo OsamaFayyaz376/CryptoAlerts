@@ -36,11 +36,7 @@ nav {
 }
 
 .activebutton {
-  box-shadow: inset 0 1px 0 0 pink;
-  background: #212529;
-  border: 1px solid white;
-  color: #ffffff;
-  text-shadow: 0 1px 0 #528ecc;
+  border-bottom: 1px solid white;
 }
 
 @media (max-width:500px) {

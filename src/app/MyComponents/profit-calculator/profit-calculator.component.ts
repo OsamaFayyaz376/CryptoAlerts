@@ -43,6 +43,7 @@ export class ProfitCalculatorComponent implements OnInit {
   private investedPrice: number = 100;
   private prices: TickerPrice[] = [];
   predictedCoins: PredictedCoin[] = [];
+  renderScreen: boolean = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -102,6 +103,6 @@ export class ProfitCalculatorComponent implements OnInit {
       coin.pnl = 0;
       this.predictedCoins.push(coin);
     })
-    console.log(this.predictedCoins);
+    this.renderScreen = true;
   }
 }

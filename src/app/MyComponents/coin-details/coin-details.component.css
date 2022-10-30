@@ -143,12 +143,12 @@ mat-slider {
 
 .history-btn {
   color: white;
-  background: #53296c;
+  background: #1f4761;
   margin-top: 15px;
 }
 
 .history-btn:hover {
-  background: #391250;
+  background: #24a5bf;
 }
 
 @media (max-width:500px) {

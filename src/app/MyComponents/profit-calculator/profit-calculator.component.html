@@ -1,38 +1,48 @@
-<form class="example-form">
+<span *ngIf="!renderScreen" class="loader">
+  <span class="loader-inner"></span>
+</span>
+<div *ngIf="!renderScreen" class="label">Setting up Calculator...</div>
 
-  <mat-form-field class="example-full-width" appearance="fill">
-    <mat-label>Enter The Amount You Want To Invest ($)</mat-label>
-    <!--suppress ALL-->
-    <input matInput type="number" step="10" placeholder="Price" value=100 #txtVal (keyup)="getInvestedPrice(txtVal.value)">
-  </mat-form-field>
+<div *ngIf="renderScreen">
 
-</form>
+  <form class="example-form">
 
-<table class="table table-bordered table-hover">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Enter The Amount You Want To Invest ($)</mat-label>
+      <!--suppress ALL-->
+      <input matInput type="number" step="10" placeholder="Price" value=100 #txtVal (keyup)="getInvestedPrice(txtVal.value)">
+    </mat-form-field>
 
-  <thead class="black">
-  <tr>
-    <th scope="col">Coin Symbol</th>
-    <th scope="col">Quantity</th>
-    <th scope="col">Current Price</th>
-    <th scope="col">Custom Price</th>
-    <th scope="col">Profit/Loss</th>
-  </tr>
-  </thead>
+  </form>
 
-  <tbody class="table-dark">
+  <table class="table table-bordered table-hover">
 
-  <tr *ngFor="let coin of predictedCoins">
-    <th scope="row">{{coin.symbol}}</th>
-    <td>{{coin.initialWorth.toFixed(3)}}</td>
-    <td contentEditable (keyup)="getCurrentPrice(coin,$event)">{{coin.currentPrice}}</td>
-    <td contentEditable (keyup)="getCustomPrice(coin,$event)">{{coin.customPrice}}</td>
-    <!--suppress ALL-->
-    <td [ngClass]="coin.pnl < 0 ? 'red2' : coin.pnl === 0 ? 'white' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
-  </tr>
+    <thead class="black">
+    <tr>
+      <th scope="col">Coin Symbol</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Current Price</th>
+      <th scope="col">Custom Price</th>
+      <th scope="col">Profit/Loss</th>
+    </tr>
+    </thead>
 
-  </tbody>
+    <tbody class="table-dark">
 
-</table>
+    <tr *ngFor="let coin of predictedCoins">
+      <th scope="row">{{coin.symbol}}</th>
+      <td>{{coin.initialWorth.toFixed(3)}}</td>
+      <td contentEditable (keyup)="getCurrentPrice(coin,$event)">{{coin.currentPrice}}</td>
+      <td contentEditable (keyup)="getCustomPrice(coin,$event)">{{coin.customPrice}}</td>
+      <!--suppress ALL-->
+      <td [ngClass]="coin.pnl < 0 ? 'red2' : coin.pnl === 0 ? 'white' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
+    </tr>
+
+    </tbody>
+
+  </table>
+
+</div>
+
 
 

@@ -1,67 +1,3 @@
-.red{
-  background: #CF304A;
-}
-
-.green{
-  background: #03A66D;
-}
-
-.red2{
-  color: #CF304A;
-}
-
-.green2{
-  color: #03A66D;
-}
-
-.docker {
-  background: #14222b;
-  color: #c7cacc;
-}
-
-.docker2 {
-  color: #c7cacc;
-}
-
-/*table {
-  counter-reset: rowNumber + 1;
-}
-
-table tr {
-  counter-increment: rowNumber;
-}
-
-table tr td:first-child::before {
-  content: counter(rowNumber);
-  min-width: 1em;
-  margin-right: 0.5em;
-}*/
-
-
-.big-heading {
-  color: #8cabb2;
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 30px;
-  text-align: center;
-}
-
-.center {
-  display: flex;
-  justify-content: center;
-}
-
-.history-btn {
-  color: white;
-  background: #1f4761;
-  margin-top: 5px;
-}
-
-.history-btn:hover {
-  background: #24a5bf;
-}
-
 .spinner {
   border :16px solid white;
   border-top: 16px solid #44444e;
@@ -144,6 +80,8 @@ table tr td:first-child::before {
 
 @media (max-width:500px) {
   .loader {
+    width: 80px;
+    height: 80px;
     top: 40%;
     left: 40%;
     position: absolute;

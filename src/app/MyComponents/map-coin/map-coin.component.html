@@ -1,4 +1,6 @@
-<div *ngIf="showSpinner" class="spinner"></div>
+<span *ngIf="showSpinner" class="loader">
+  <span class="loader-inner"></span>
+</span>
 <div *ngIf="showSpinner" class="label">Fetching Portfolio...</div>
 
 <app-display-price *ngIf="!showSpinner" [data]="coins" [totalPriceInvested]="totalPriceInvested"

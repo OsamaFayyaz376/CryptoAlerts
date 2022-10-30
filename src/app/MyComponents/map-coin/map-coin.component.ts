@@ -14,7 +14,7 @@ import {symbols} from "ansi-colors";
 @Component({
   selector: 'app-map-coin',
   templateUrl: './map-coin.component.html',
-  styleUrls: ['./map-coin.component.css']
+  styleUrls: ['./map-coin.component.scss']
 })
 export class MapCoinComponent implements OnInit, OnDestroy {
   coins: Coin[] = [];
