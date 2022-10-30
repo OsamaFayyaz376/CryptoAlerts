@@ -23,7 +23,7 @@
   color: #c7cacc;
 }
 
-table {
+/*table {
   counter-reset: rowNumber + 1;
 }
 
@@ -35,7 +35,7 @@ table tr td:first-child::before {
   content: counter(rowNumber);
   min-width: 1em;
   margin-right: 0.5em;
-}
+}*/
 
 
 .big-heading {

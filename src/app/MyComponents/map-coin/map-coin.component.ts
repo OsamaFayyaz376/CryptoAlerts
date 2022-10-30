@@ -169,7 +169,12 @@ export class MapCoinComponent implements OnInit, OnDestroy {
 
       coin = new Coin();
       coin.symbol = portfolio.asset;
-      coin.currentPrice = Number(Number(tickerStatatistic?.price).toFixed(8));
+
+      if (coin.symbol === "LUNC") {
+        coin.currentPrice = Number(Number(tickerStatatistic?.price).toFixed(8));
+      } else {
+        coin.currentPrice = Number(Number(tickerStatatistic?.price).toFixed(4));
+      }
 
       if(!coin.currentPrice) {
         coin.currentPrice = 0;

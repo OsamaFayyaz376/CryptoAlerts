@@ -24,7 +24,7 @@
     <td [ngClass]="coin.pnl < 0 ? 'red2' : 'green2'">{{coin.pnl.toFixed(3)}}</td>
     <td>{{coin.currentPrice}}</td>
     <!--suppress ALL-->
-    <td [ngClass]="coin.change < 0 ? 'red2' : 'green2'">{{coin.change}}%</td>
+    <td [ngClass]="coin.change < 0 ? 'red2' : 'green2'">{{coin.change.toFixed(1)}}%</td>
   </tr>
 
   </tbody>

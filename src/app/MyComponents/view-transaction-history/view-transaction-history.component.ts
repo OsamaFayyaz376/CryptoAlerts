@@ -38,6 +38,11 @@ export class ViewTransactionHistoryComponent implements OnInit, OnDestroy {
     this.apiService.fetchCoinPrice(this.coin.symbol + "USDT").subscribe(
       (tickerPrice: TickerPrice) => {
         this.tickerPrice = tickerPrice;
+        if (this.tickerPrice.symbol == "LUNCUSDT") {
+          this.tickerPrice.price = Number(Number(this.tickerPrice.price).toFixed(8));
+        } else {
+          this.tickerPrice.price = Number(Number(this.tickerPrice.price).toFixed(4));
+        }
       }
     )
   }
@@ -71,7 +76,10 @@ export class ViewTransactionHistoryComponent implements OnInit, OnDestroy {
   }
 
   getTradePrice(trade: Trade) {
-    return Number(trade.price).toFixed(8);
+    if (trade.symbol === "LUNCUSDT") {
+      return Number(trade.price).toFixed(8);
+    }
+    return Number(trade.price).toFixed(2);
   }
 
   getPercentage(trade: Trade, coin: Coin): Number {

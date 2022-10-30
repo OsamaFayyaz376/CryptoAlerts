@@ -21,7 +21,11 @@ export class CoinDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.idealPrice = this.coin.investedPrice / this.coin.quantity;
+    if (this.coin.symbol == "LUNC") {
+      this.idealPrice = Number(Number(this.coin.investedPrice / this.coin.quantity).toFixed(8));
+    } else {
+      this.idealPrice = Number(Number(this.coin.investedPrice / this.coin.quantity).toFixed(4));
+    }
     this.investedPrice = this.coin.investedPrice;
     this.coinQuantity = this.coin.quantity;
     this.currentValue = this.coin.currentValue;

@@ -6,25 +6,26 @@
 
   <thead class="docker">
   <tr>
-    <th scope="col">Trade #</th>
     <th scope="col">Initial Value</th>
-    <th scope="col">Initial Price</th>
+    <th scope="col">Initial &nbsp; Price</th>
     <th scope="col">Current Value</th>
     <th scope="col">Current Price</th>
     <th scope="col">PNL</th>
+    <th scope="col">PNL%</th>
   </tr>
   </thead>
 
   <tbody class="table-dark docker2">
 
   <tr *ngFor="let trade of trades">
-    <td></td>
     <td>${{getTradeQuantity(trade)}}</td>
     <td>${{getTradePrice(trade)}}</td>
     <td>${{getTradeCurrentValue(trade, coin)}}</td>
     <td>${{this.tickerPrice.price}}</td>
     <!--suppress ALL-->
-    <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getTradePNL(trade, coin)}} ( {{getPercentage(trade, coin)}}% )</td>
+    <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getTradePNL(trade, coin)}}</td>
+    <!--suppress ALL-->
+    <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getPercentage(trade, coin)}}%</td>
   </tr>
 
   </tbody>
