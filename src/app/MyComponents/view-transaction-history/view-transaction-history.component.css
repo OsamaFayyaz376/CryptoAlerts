@@ -1,0 +1,63 @@
+.red{
+  background: #CF304A;
+}
+
+.green{
+  background: #03A66D;
+}
+
+.red2{
+  color: #CF304A;
+}
+
+.green2{
+  color: #03A66D;
+}
+
+.docker {
+  background: #14222b;
+  color: #c7cacc;
+}
+
+.docker2 {
+  color: #c7cacc;
+}
+
+table {
+  counter-reset: rowNumber + 1;
+}
+
+table tr {
+  counter-increment: rowNumber;
+}
+
+table tr td:first-child::before {
+  content: counter(rowNumber);
+  min-width: 1em;
+  margin-right: 0.5em;
+}
+
+
+.big-heading {
+  color: #8cabb2;
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.history-btn {
+  color: white;
+  background: #53296c;
+  margin-top: 5px;
+}
+
+.history-btn:hover {
+  background: #391250;
+}

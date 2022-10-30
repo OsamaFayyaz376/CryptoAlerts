@@ -20,6 +20,10 @@ export class ApiService {
     return this.http.get<TickerPrice[]>(`${this.url}/coinprices`);
   }
 
+  fetchCoinPrice(symbol: string) {
+    return this.http.get<TickerPrice>(`${this.url}/coinprice/${symbol}`);
+  }
+
   fetchPortfolio() {
     return this.http.get<Portfolio[]>(`${this.url}/portfolio`);
   }

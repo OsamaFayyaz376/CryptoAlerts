@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Coin} from "../../Models/Coin";
 import {Router} from "@angular/router";
-import {FooterService} from "../../Services/footer.service";
 
 @Component({
   selector: 'app-display-price',
@@ -18,7 +17,7 @@ export class DisplayPriceComponent implements OnInit {
   // @ts-ignore
   coin: Coin;
 
-  constructor(private footerService: FooterService) {
+  constructor() {
   }
 
   ngOnInit(): void {
@@ -26,7 +25,6 @@ export class DisplayPriceComponent implements OnInit {
 
   showDetails(currentCoin: Coin) {
     this.showTable = false;
-    this.footerService.hide();
     this.coin = currentCoin;
   }
 

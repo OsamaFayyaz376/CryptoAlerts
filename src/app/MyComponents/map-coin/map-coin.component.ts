@@ -7,7 +7,6 @@ import {TickerPrice} from "../../Models/TickerPrice";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Trade} from "../../Models/Trade";
 import {Subscription, timer} from "rxjs";
-import {FooterService} from "../../Services/footer.service";
 import {ApiService} from "../../Services/api.service";
 import {TickerStatistic} from "../../Models/TickerStatistic";
 import {symbols} from "ansi-colors";
@@ -31,11 +30,9 @@ export class MapCoinComponent implements OnInit, OnDestroy {
   showSpinner: boolean = true;
   USDTPrice: number = 0;
 
-  constructor(private footerService: FooterService,
-              private apiService: ApiService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit() {
-    this.footerService.hide();
     this.fetchCoin();
   }
 
@@ -80,7 +77,7 @@ export class MapCoinComponent implements OnInit, OnDestroy {
             this.symbols.push(portfolio.asset + "USDT");
           } else if (portfolio.asset === "USDT") {
             // @ts-ignore
-            this.USDTPrice = portfolio.free;
+            this.USDTPrice = Number(portfolio.free) + Number(portfolio.locked);
             this.symbols.push("USDC" + portfolio.asset);
           }
         })
@@ -172,19 +169,26 @@ export class MapCoinComponent implements OnInit, OnDestroy {
 
       coin = new Coin();
       coin.symbol = portfolio.asset;
-      coin.currentPrice = Number(Number(tickerStatatistic?.price).toFixed(5));
+      coin.currentPrice = Number(Number(tickerStatatistic?.price).toFixed(8));
 
       if(!coin.currentPrice) {
         coin.currentPrice = 0;
       }
 
-      coin.change = tickerStatatistic?.change;
-      coin.quantity = Number(portfolio.free) + Number(portfolio.locked);
-      coin.currentValue = Number(coin.currentPrice) * Number(coin.quantity);
-      coin.symbol !== "USDT" ? coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice ?? 0 : coin.investedPrice = coin.currentValue;
-      coin.pnl = Number(coin.currentValue) - Number(coin.investedPrice);
+      if (coin.symbol === "USDT") {
+        coin.pnl = 0;
+        coin.change = 0;
+        coin.currentValue = this.USDTPrice;
+        coin.investedPrice = this.USDTPrice;
+      } else {
+        coin.change = tickerStatatistic?.change;
+        coin.quantity = Number(portfolio.free) + Number(portfolio.locked);
+        coin.currentValue = Number(coin.currentPrice) * Number(coin.quantity);
+        coin.investedPrice = this.investedPrices.find(price => price.symbol === portfolio.asset)?.investedPrice ?? 0;
+        coin.pnl = Number(coin.currentValue) - Number(coin.investedPrice);
+      }
 
-      if (coin.investedPrice || coin.symbol === "USDT") {
+      if (coin.investedPrice) {
         this.coins.push(coin);
       }
 
@@ -192,7 +196,6 @@ export class MapCoinComponent implements OnInit, OnDestroy {
       if(counter === this.portfolio.length) {
         this.tickerStats = [];
         this.showSpinner = false;
-        this.footerService.show();
       }
 
     })

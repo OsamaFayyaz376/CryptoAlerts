@@ -12,11 +12,11 @@
 
   <thead class="black">
   <tr>
-    <th scope="col">Coin</th>
+    <th scope="col">Coin Symbol</th>
     <th scope="col">Quantity</th>
-    <th scope="col">Current Price ($)</th>
-    <th scope="col">Custom Price ($)</th>
-    <th scope="col">PNL ($)</th>
+    <th scope="col">Current Price</th>
+    <th scope="col">Custom Price</th>
+    <th scope="col">Profit/Loss</th>
   </tr>
   </thead>
 
@@ -25,7 +25,7 @@
   <tr *ngFor="let coin of predictedCoins">
     <th scope="row">{{coin.symbol}}</th>
     <td>{{coin.initialWorth.toFixed(3)}}</td>
-    <td>{{coin.currentPrice}}</td>
+    <td contentEditable (keyup)="getCurrentPrice(coin,$event)">{{coin.currentPrice}}</td>
     <td contentEditable (keyup)="getCustomPrice(coin,$event)">{{coin.customPrice}}</td>
     <!--suppress ALL-->
     <td [ngClass]="coin.pnl < 0 ? 'red2' : coin.pnl === 0 ? 'white' : 'green2'">{{coin.pnl.toFixed(3)}}</td>

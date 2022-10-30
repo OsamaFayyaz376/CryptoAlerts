@@ -1,0 +1,36 @@
+<h1 class="big-heading">
+  <span>{{coin.symbol}} TRADE HISTORY</span>
+  </h1>
+
+<table class="table table-bordered table-hover my-5">
+
+  <thead class="docker">
+  <tr>
+    <th scope="col">Trade #</th>
+    <th scope="col">Initial Value</th>
+    <th scope="col">Initial Price</th>
+    <th scope="col">Current Value</th>
+    <th scope="col">Current Price</th>
+    <th scope="col">PNL</th>
+  </tr>
+  </thead>
+
+  <tbody class="table-dark docker2">
+
+  <tr *ngFor="let trade of trades">
+    <td></td>
+    <td>${{getTradeQuantity(trade)}}</td>
+    <td>${{getTradePrice(trade)}}</td>
+    <td>${{getTradeCurrentValue(trade, coin)}}</td>
+    <td>${{this.tickerPrice.price}}</td>
+    <!--suppress ALL-->
+    <td [ngClass]="getTradePNL(trade, coin) < 0 ? 'red2' : 'green2'">{{getTradePNL(trade, coin)}} ( {{getPercentage(trade, coin)}}% )</td>
+  </tr>
+
+  </tbody>
+
+</table>
+
+<div class="center">
+  <button (click)="showCoinDetails()" mat-raised-button class="history-btn">Go Back to Coin Details</button>
+</div>

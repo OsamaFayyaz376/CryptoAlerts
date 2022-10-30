@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {Coin} from "../../Models/Coin";
 import {MatSliderChange} from "@angular/material/slider";
-import {FooterService} from "../../Services/footer.service";
 
 @Component({
   selector: 'app-coin-details',
@@ -17,11 +16,11 @@ export class CoinDetailsComponent implements OnInit {
   coinQuantity: number = 0;
   currentValue: number = 0;
   pnl: number = 0;
+  showHistory: boolean = false;
 
-  constructor(private footerService: FooterService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.footerService.hide();
     this.idealPrice = this.coin.investedPrice / this.coin.quantity;
     this.investedPrice = this.coin.investedPrice;
     this.coinQuantity = this.coin.quantity;
@@ -30,7 +29,6 @@ export class CoinDetailsComponent implements OnInit {
   }
 
   onClick() {
-    this.footerService.show();
     this.close.emit();
   }
 
@@ -52,5 +50,13 @@ export class CoinDetailsComponent implements OnInit {
     this.currentValue = (this.coin.currentValue * (value / 100));
     this.coinQuantity = (this.coin.quantity * (value / 100));
     this.pnl = (this.coin.pnl * (value / 100));
+  }
+
+  showTransactionHistory() {
+    this.showHistory = true;
+  }
+
+  onCloseHistory($event: any) {
+    this.showHistory = false;
   }
 }

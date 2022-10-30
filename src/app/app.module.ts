@@ -13,10 +13,9 @@ import {MatSliderModule} from "@angular/material/slider";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import { ProfitCalculatorComponent } from './MyComponents/profit-calculator/profit-calculator.component';
-import { FooterComponent } from './MyComponents/footer/footer.component';
-import {FooterService} from "./Services/footer.service";
 import {ApiService} from "./Services/api.service";
 import {MatButtonModule} from "@angular/material/button";
+import { ViewTransactionHistoryComponent } from './MyComponents/view-transaction-history/view-transaction-history.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,7 @@ import {MatButtonModule} from "@angular/material/button";
     CoinDetailsComponent,
     MapCoinComponent,
     ProfitCalculatorComponent,
-    FooterComponent
+    ViewTransactionHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -39,8 +38,7 @@ import {MatButtonModule} from "@angular/material/button";
     MatButtonModule
   ],
   providers: [
-    ApiService,
-    FooterService,
+    ApiService
   ],
   bootstrap: [AppComponent]
 })

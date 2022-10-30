@@ -2,17 +2,15 @@
 
 <body>
 
-<h1 class="big-heading">
-  <span>{{coin.symbol}} DETAILS</span>
-  <span class="space_lg">&nbsp;</span>
-  <span class="cross" (click)="onClick()">&#10060;</span></h1>
+<h1 *ngIf="!showHistory" class="big-heading">
+  <span>{{coin.symbol}} DETAILS</span></h1>
 
-<div class="container">
+<div *ngIf="!showHistory" class="container">
 
   <form class="example-form">
 
     <mat-form-field class="example-full-width no-hover" appearance="fill">
-      <mat-label class="fw-bold">Invested Price</mat-label>
+      <mat-label class="fw-bold">Invested Value</mat-label>
       <!--suppress ALL-->
       <input matInput readonly placeholder="Invested Price" value={{investedPrice.toFixed(2)}}>
     </mat-form-field>
@@ -26,7 +24,7 @@
     <mat-form-field class="example-full-width no-hover" appearance="fill">
       <mat-label>Ideal Price</mat-label>
       <!--suppress ALL-->
-      <input matInput readonly placeholder="Ideal Price" value={{idealPrice.toFixed(2)}}>
+      <input matInput readonly placeholder="Ideal Price" value={{idealPrice.toFixed(8)}}>
     </mat-form-field>
 
     <mat-form-field class="example-full-width no-hover" appearance="fill">
@@ -48,7 +46,7 @@
     </mat-form-field>
   </form>
 
-  <span class="span-heading">Coin Percentage       </span>
+  <!--<span class="span-heading">Coin Percentage       </span>
   <mat-slider class="slider" (input)="onInputChange($event)"
               thumbLabel
               [displayWith]="formatLabel"
@@ -57,13 +55,24 @@
               min="0"
               max="100000"
               value="100000"
-              aria-label="units"></mat-slider>
+              aria-label="units"></mat-slider>-->
 
   <div class="center">
-    <button mat-raised-button color="primary">Transaction History</button>
+
+    <div>
+      <button (click)="showTransactionHistory()" mat-raised-button class="history-btn">View Trade History</button>
+    </div>
+
+    <div>
+      <button (click)="onClick()" mat-raised-button class="history-btn">Go Back to Portfolio</button>
+    </div>
+
   </div>
 
+
 </div>
+
+<app-view-transaction-history *ngIf="showHistory" [coin]="coin" (close)="onCloseHistory($event)"></app-view-transaction-history>
 
 </body>
 

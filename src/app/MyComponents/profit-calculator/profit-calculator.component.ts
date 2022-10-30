@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../Services/api.service";
-import {FooterService} from "../../Services/footer.service";
 import {TickerPrice} from "../../Models/TickerPrice";
 import {HttpErrorResponse} from "@angular/common/http";
 import {PredictedCoin} from "../../Models/PredictedCoin";
@@ -45,11 +44,9 @@ export class ProfitCalculatorComponent implements OnInit {
   private prices: TickerPrice[] = [];
   predictedCoins: PredictedCoin[] = [];
 
-  constructor(private apiService: ApiService,
-              private footerService: FooterService) { }
+  constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.footerService.hide();
     this.apiService.fetchTickerPrices().subscribe(
       (tickerPrices: TickerPrice[]) => {
         this.prices = tickerPrices.filter(tickerPrice => this.favouriteCoins.includes(tickerPrice.symbol));
@@ -67,14 +64,22 @@ export class ProfitCalculatorComponent implements OnInit {
   }
 
   getCustomPrice(rowCoin: PredictedCoin, event: any) {
-    console.log(rowCoin);
-    console.log(event);
     // @ts-ignore
     let coin: PredictedCoin = this.predictedCoins.find(predictedCoin => predictedCoin.symbol === rowCoin.symbol);
-    console.log(coin);
     coin.customPrice = Number(event.target.innerText);
     coin.currentWorth = coin.initialWorth * coin.customPrice;
     coin.pnl = coin.currentWorth - this.investedPrice;
+  }
+
+  getCurrentPrice(rowCoin: PredictedCoin, event: any) {
+    // @ts-ignore
+    let coin: PredictedCoin = this.predictedCoins.find(predictedCoin => predictedCoin.symbol === rowCoin.symbol);
+    coin.currentPrice = Number(event.target.innerText);
+    coin.initialWorth = this.investedPrice / coin.currentPrice;
+    if (coin.customPrice !== 0) {
+      coin.currentWorth = coin.initialWorth * coin.customPrice;
+      coin.pnl = coin.currentWorth - this.investedPrice;
+    }
   }
 
   private calculatePNL() {

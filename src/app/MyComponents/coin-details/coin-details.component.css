@@ -1,6 +1,5 @@
 html {
   background: #202c33;
-  height: 101%;
 }
 
 body {
@@ -46,10 +45,6 @@ h1 {
 
 .no-hover {
   padding-top: 12px;
-}
-
-.no-hover:hover {
-  background: #766182;
 }
 
 .last-label {
@@ -141,10 +136,25 @@ mat-slider {
 }
 
 .center {
+  width: 38%;
+  display: flex;
+  justify-content: space-evenly;
+}
 
+.history-btn {
+  color: white;
+  background: #53296c;
+  margin-top: 15px;
+}
+
+.history-btn:hover {
+  background: #391250;
 }
 
 @media (max-width:500px) {
+  .center {
+    width: auto;
+  }
   .space_lg {
     margin-left: 220px;
   }
