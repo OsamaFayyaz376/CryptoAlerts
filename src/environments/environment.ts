@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://crypto.ap-south-1.elasticbeanstalk.com'
+  baseUrl: 'https://ec2-65-2-115-237.ap-south-1.compute.amazonaws.com'
 };
 
 /*

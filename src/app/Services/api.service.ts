@@ -17,7 +17,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   fetchTickerPrices() {
-    return this.http.get<TickerPrice[]>(`${this.url}/coinprices/`);
+    return this.http.get<TickerPrice[]>(`${this.url}/coinprices`);
   }
 
   fetchCoinPrice(symbol: string) {
@@ -25,7 +25,7 @@ export class ApiService {
   }
 
   fetchPortfolio() {
-    return this.http.get<Portfolio[]>(`${this.url}/portfolio/`);
+    return this.http.get<Portfolio[]>(`${this.url}/portfolio`);
   }
 
   getTrade(symbol: string) {
