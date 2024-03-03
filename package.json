@@ -1,15 +1,14 @@
 {
-  "name": "org.apache.cordova.newapp",
-  "displayName": "APP",
+  "name": "CryptoApp",
+  "displayName": "CRYPTOLAND",
   "version": "1.0.0",
   "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "main": "index.js",
   "scripts": {
     "ng": "ng",
-    "normal-start": "ng serve",
-    "heroku-postbuild": "NODE_OPTIONS=--openssl-legacy-provider ng build --prod && npm install -g http-server-spa",
+    "normal-start": "set NODE_OPTIONS=--openssl-legacy-provider && ng serve --configuration=production",
+    "heroku-postbuild": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --configuration=production && npm install -g http-server-spa",
     "start": "http-server-spa www index.html $PORT",
-    "build": "ng build",
+    "build": "set NODE_OPTIONS=--openssl-legacy-provider && ng build --configuration=production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -25,8 +24,12 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@capacitor/android": "^5.4.1",
+    "@capacitor/cli": "^5.4.1",
+    "@capacitor/core": "^5.4.1",
     "bootstrap": "^5.2.1",
-    "cordova": "^11.0.0",
+    "http-server": "^14.1.1",
+    "rimraf": "^5.0.5",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
@@ -37,7 +40,6 @@
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
     "@types/node": "^12.11.1",
-    "cordova-android": "^10.1.2",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -45,15 +47,5 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "~1.7.0",
     "typescript": "~4.3.5"
-  },
-  "keywords": [
-    "ecosystem:cordova"
-  ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
-  "cordova": {
-    "platforms": [
-      "android"
-    ]
   }
 }

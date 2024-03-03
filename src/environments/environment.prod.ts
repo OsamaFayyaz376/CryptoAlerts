@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://cryptyness.herokuapp.com'
+  baseUrl: 'http://crypto.ap-south-1.elasticbeanstalk.com'
 };
